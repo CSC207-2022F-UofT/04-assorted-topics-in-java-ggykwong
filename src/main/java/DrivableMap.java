@@ -7,9 +7,7 @@
  * created the constructor for you already.
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 class DrivableMap {
     HashMap<String, Drivable> drivable_map;
@@ -27,9 +25,13 @@ class DrivableMap {
      *       in drivable_map, then add the pair to drivable_map.
      *       Return true if the Drivable was added to drivable_map.
      */
-
-
-
+    public boolean addDrivable(String ID, Drivable item) {
+        if (drivable_map.containsKey(ID)) {
+            return false;
+        }
+        drivable_map.put(ID, item);
+        return true;
+    }
 
     /* TODO: Write a method named hasFasterThan that takes an int (a speed)
      *       and returns true iff there is at least one item in drivable_map
@@ -37,15 +39,30 @@ class DrivableMap {
      * You may want to use drivable_map.keys() or drivable_map.values() to
      * iterate through drivable_map.
      */
-
-
-
-
+    public boolean hasFasterThan(int speed) {
+        for (Object value : drivable_map.values()) {
+            if (value instanceof Drivable) {
+                if (((Drivable) value).getMaxSpeed() >= speed) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /* TODO: Write a method named getTradable that takes no arguments and
      *       returns a List containing all of the Tradable items in
      *       drivable_map.
      */
+    public ArrayList getTradable() {
+        ArrayList<Tradable> result = new ArrayList<>();
+        for (Object value : drivable_map.values()) {
+            if (value instanceof Tradable) {
+                result.add((Tradable) value);
+            }
+        }
+        return result;
+    }
 
 
 
